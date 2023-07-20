@@ -1,0 +1,69 @@
+<div class="container-fluid bg-light">
+    <div class="container bg-light">
+        <div class="row mt-4" style="height: 500px;">
+            <div class="col"></div>
+            <div class="col-md-6 bg-white py-3  shadow">
+                <div class="card bg-warning mt-4">
+                    <h4 class="text-white m-2">Todo List</h4>
+                </div>
+                <div class="shadow">
+                    <div class="input-group p-4">
+                        <input type="text" class="form-control" placeholder="Enter Task Detail" name="task"
+                            [(ngModel)]="addTaskVal " aria-describedby="button-addon2">
+                        <button class="btn btn-outline-success" type="button" id="button-addon2"
+                            (click)="addTask()">+</button>
+                    </div>
+                </div>
+                <div class="text-primary mt-4 ">Tasks</div>
+                <div style="overflow-y:auto;height: 350px;">
+                    <div class="m-3" *ngFor="let item of taskArr">
+                        <div class="p-2 shadow border">
+                            <div class="input-group ps-3 row">
+                                <div class="card col-md-10 p-2 border-0">
+                                    {{item.name}}
+                                </div>
+
+                                <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" (click)="call(item)">e</button>
+                                <div class=" btn btn-outline-danger col" (click)="deleteTask(item)">X
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Button trigger modal -->
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="shadow">
+                                <div class="input-group p-4">
+
+                                    <input type="text" class="form-control" placeholder="Update Name" name="task"
+                                        [(ngModel)]="editTaskVal" aria-describedby="button-addon2">
+                                    <button class="btn btn-outline-success" type="button" id="button-addon2"
+                                        (click)="editTask()" data-bs-dismiss="modal">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col bg-white"></div>
+        </div>
+    </div>
+</div>
