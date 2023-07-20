@@ -8,6 +8,8 @@ import { CrudService } from 'src/app/service/crud.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  exist: string = ''
+  errr: string = ''
   taskObj: Task = new Task(); //Instance of Class
   taskArr: Task[] = [] //Array to store the value
   addTaskVal: string = '' //Empty String
@@ -15,24 +17,37 @@ export class DashboardComponent implements OnInit {
   constructor(private crud: CrudService) { }
 
   ngOnInit() {
+    this.addTaskVal = ''
     this.getAllTask() // All Array Item to display on the screen
   }
   getAllTask() {
     this.crud.getTask().subscribe(res => {
       this.taskArr = res;
     }, err => {
-      alert("Unable to get list of tasks");
+      err = 'Unable to Add Task'
     });
   }
 
 
   addTask() {
+    if (this.addTaskVal.trim() === '') {
+      this.errr = "Add Some Task"
+      return
+    }
+    const isTaskExists = this.taskArr.some(task => task.name === this.addTaskVal);
+    if (isTaskExists) {
+      this.exist = "Task Already exist"
+      return;
+    }
     this.taskObj.name = this.addTaskVal;
     this.crud.add(this.taskObj).subscribe(res => {
+      this.errr = '';
+      this.exist = '';
       this.ngOnInit();
-      this.addTaskVal = ''
     }, err => {
+
       alert(err);
+
     })
   }
 
