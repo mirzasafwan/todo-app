@@ -8,6 +8,7 @@
                 </div>
                 <div class="shadow">
                     <div class="input-group p-4">
+
                         <input type="text" class="form-control" placeholder="Enter Task Detail" name="task"
                             [(ngModel)]="addTaskVal " aria-describedby="button-addon2">
                         <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="addTask()"
@@ -23,11 +24,23 @@
                     <div class="m-3" *ngFor="let item of taskArr">
                         <div class="p-2 shadow border">
                             <div class="input-group ps-3 row">
-                                <div class="card col-md-10 p-2 border-0">
-                                    {{item.name}}
-                                </div>
+                                <!-- <input type="checkbox" class="card col-md-2 mx-2 custom-checkbox "
+                                    [(ngModel)]="item.isComplete" (change)="updateTaskStatus(item)">
 
-                                <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal"
+                                <div class="card col-md-6 p-2  border-0 mx-2"
+                                    [ngClass]="{'completed-task': item.isComplete}">
+                                    {{item.name}}
+                                </div> -->
+
+                                <label class="col-md-8">
+                                    <input type="checkbox" [(ngModel)]="item.isComplete"
+                                        (change)="updateTaskStatus(item)">
+                                    <span class="label-text2 " [ngClass]="{'completed-task': item.isComplete}">
+                                        {{
+                                        item.name }}</span>
+                                </label>
+
+                                <button class="btn btn-outline-primary col-md-2 me-2" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" (click)="call(item)">e</button>
                                 <div class=" btn btn-outline-danger col" (click)="deleteTask(item)">X
                                 </div>

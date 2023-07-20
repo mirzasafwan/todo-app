@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
       return;
     }
     this.taskObj.name = this.addTaskVal;
+    this.taskObj.isComplete = false;
     this.crud.add(this.taskObj).subscribe(res => {
       this.errr = '';
       this.exist = '';
@@ -79,7 +80,16 @@ export class DashboardComponent implements OnInit {
       alert("Failed to delete task");
     });
   }
-
+  updateTaskStatus(task: Task) {
+    this.crud.edit(task).subscribe(
+      res => {
+        // Task status updated successfully
+      },
+      err => {
+        alert('Failed to update task status');
+      }
+    );
+  }
 }
 
 
