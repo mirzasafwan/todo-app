@@ -31,11 +31,13 @@ export class DashboardComponent implements OnInit {
 
   addTask() {
     if (this.addTaskVal.trim() === '') {
+      this.exist = ""
       this.errr = "Add Some Task"
       return
     }
     const isTaskExists = this.taskArr.some(task => task.name === this.addTaskVal);
     if (isTaskExists) {
+      this.errr = ''
       this.exist = "Task Already exist"
       return;
     }
@@ -57,7 +59,6 @@ export class DashboardComponent implements OnInit {
 
   editTask() {
     this.taskObj.name = this.editTaskVal;
-
     this.crud.edit(this.taskObj).subscribe(res => {
       this.ngOnInit();
 
